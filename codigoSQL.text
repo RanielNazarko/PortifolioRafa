@@ -1,0 +1,79 @@
+CREATE DATABASE portfolio_rafa;
+USE portfolio_rafa;
+SELECT DATABASE();
+
+-- cria a tabela perfil na conexao portifolio_rafa
+USE portfolio_rafa;
+CREATE TABLE perfil (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    descricao TEXT
+);
+
+-- insere os dados na tabela perfil da rafa
+USE portfolio_rafa;
+INSERT INTO perfil (nome, email, descricao)
+VALUES (
+    'Rafaelly',
+    'rafaelly.kobukoski@escola.pr.gov.br',
+    'Me chamo Rafaelly, tenho 15 anos e sou de Ponta Grossa-PR. Estou cursando Ensino Médio Técnico em Desenvolvimento de Sistemas. Meu sonho é trabalhar no SIATE e fazer intercâmbio.'
+);
+
+-- ve os dados da tabela perfil
+SELECT * FROM perfil;
+
+-- cria a tebela cursos na conexao portifolio_rafa
+USE portfolio_rafa;
+CREATE TABLE cursos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fk_perfil INT NOT NULL,
+    nome VARCHAR(150) NOT NULL,
+    horas INT,
+
+    FOREIGN KEY (fk_perfil) REFERENCES perfil(id)
+);
+
+-- adiciona cursos na tabela cursos
+USE portfolio_rafa;
+INSERT INTO cursos (fk_perfil, nome, horas)
+VALUES (1, 'Git e GitHub', 10);
+
+-- ve a tabela cursos
+SELECT * FROM cursos;
+
+-- cria a tabela certificados
+USE portfolio_rafa;
+CREATE TABLE certificados (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fk_perfil INT NOT NULL,
+    titulo VARCHAR(200) NOT NULL,
+    ano YEAR,
+
+    FOREIGN KEY (fk_perfil) REFERENCES perfil(id)
+);
+
+-- adiciona certificados na tabela certificados
+USE portfolio_rafa;
+INSERT INTO certificados (fk_perfil, titulo, ano)
+VALUES (1, 'Certificado de Git e GitHub', 2026);
+
+-- ve os certificados cadastrados na tabela certificados
+SELECT * FROM certificados;
+
+
+
+
+
+-- 1. Apaga os cursos duplicados
+USE portfolio_rafa;
+DELETE FROM cursos
+WHERE id IN (2, 3);
+-- 2. Apaga os perfis duplicados
+USE portfolio_rafa;
+DELETE FROM perfil
+WHERE id IN (2, 3);
+-- 3. Apaga os certificados duplicados
+USE portfolio_rafa;
+DELETE FROM certificados
+WHERE id IN (2, 3);

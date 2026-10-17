@@ -1,0 +1,69 @@
+- abrir o MySQL
+- Criar uma nova conexão
+-
+-
+- npm install mysql2
+- npm audit
+- criar arquivo conexao.js dentro do database que esta dentro do src
+- crie o arquivo .env dentro apenas da pasta geral
+- crie o arquivo .gitignore tambem dentro apenas da pasta geral
+- coloque isso no .gitignore sem os parenteses (.env
+node_modules/)
+- coloque o codigo abaixo com as configuraçoes do MySQL
+
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=1151
+DB_NAME=portfolio_rafa
+
+- colar os codigos abaixo no conexao.js
+
+// Carrega as configurações do arquivo .env
+require('dotenv').config();
+const mysql = require('mysql2/promise');
+// Cria um conjunto de conexões com o banco de dados
+const pool = mysql.createPool({
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT),
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+});
+// Disponibiliza a conexão para os outros arquivos
+module.exports = pool;
+
+- crie uma pasta chamada repositories dentro da pasta src 
+- dentro da pasta repositories crie o arquivo perfil.repository.js
+- crie uma pasta chamada services dentro da pasta src
+- dentro da pasta services crie o arquivo perfil.service.js
+- crie uma pasta chamada controllers dentro da pasta src
+- dentro da pasta controllers crie o arquivo portfolio.controller.js
+- crie uma pasta chamada routes dentro da pasta src
+- dentro da pasta routes crie o arquivo portfolio.routes.js
+- dentro da pasta repositories crie um arquivo curso.repository.js
+- dentro da pasta repositories crie um arquivo certificado.repository.js
+- dentro da pasta services crie um arquivo curso.service.js
+- dentro da pasta service crie um arquivo certificado.service.js
+- troque o codigo do portfolio.ejs: 
+
+<h2 class="text-3xl font-bold mb-6 text-emerald-400">Sobre Mim</h2>
+<p class="text-emerald-300 leading-relaxed text-base md:text-lg">
+  Me chamo Rafaelly, tenho 15 anos e sou de Ponta Grossa-PR. 
+  Estou cursando Ensino Médio Técnico em Desenvolvimento de Sistemas. 
+  Meu sonho é trabalhar no SIATE e fazer intercâmbio.
+</p>
+
+por:
+
+<h2 class="text-3xl font-bold mb-6 text-emerald-400">Sobre Mim</h2>
+<p class="text-emerald-300 leading-relaxed text-base md:text-lg">
+  <%= dados.perfil.descricao %>
+</p>
+
+- crie o arquivo banco.sql dentro da pasta database que esta dentro da pasta src
+- crie um arquivo dentro da pasta src com o nome app.js
+- crie um arquivo dentro apenas da pasta geral com o nome README.md
